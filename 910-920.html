@@ -1,0 +1,192 @@
+<html lang="en" style="font-size: 100px;">
+	<head>
+		<title>
+			进站码
+		</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+		<meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,user-scalable=no">
+		<link href="css/chunk-vendors.779f7d1d.css" rel="stylesheet">
+		<link href="css/app.f0480dbd.css" rel="stylesheet">
+		<script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js">
+		</script>
+	</head>
+	<body onload="countDown(); setInterval(countDown, 1000); showDate(); ">
+		<div id="app" class="">
+			<div data-v-de316b06="" class="page">
+				<div id="showcode" data-v-de316b06="" class="code-con">
+					<div data-v-de316b06="" class="top-tip">
+						请务必在预约时间段前后
+						<span data-v-de316b06="" class="min">
+							10分钟
+						</span>
+						内进站。
+					</div>
+					<div data-v-de316b06="" class="timer1-con">
+					</div>
+					<div data-v-de316b06="" class="mask">
+						<div id="hiddenLeftMsg" data-v-de316b06="" class="">
+							距离预约进站时间还剩
+						</div>
+						<div id="hiddenTimeLeft" data-v-de316b06="" class="timer">
+							<span id="hour" data-v-de316b06="">
+							</span>
+							:
+							<span id="minute" data-v-de316b06="">
+							</span>
+							:
+							<span id="second" data-v-de316b06="">
+							</span>
+						</div>
+					</div>
+					<div data-v-de316b06="" class="tip">
+						请凭此二维码，前往地铁站指定预约通道扫码进站。
+					</div>
+					<div data-v-de316b06="" class="station-con">
+						<div data-v-de316b06="">
+							昌平线
+							<span data-v-de316b06="" class="big">
+								沙河站
+							</span>
+						</div>
+						<div data-v-de316b06="" class="time">
+							<span id="date"></span>
+							<span data-v-de316b06="" class="big">09:10~09:20</span>
+						</div>
+						<div data-v-de316b06="" class="time">
+							预约通道进站口
+							<span data-v-de316b06="" class="big">
+								A2口
+							</span>
+						</div>
+					</div>
+				</div>
+				<div id="nodata" data-v-747d3f2c="" class="nodata">
+				</div>
+				<div class="mint-tabbar home-tab">
+					<a href="index.html" class="mint-tab-item">
+						<div class="mint-tab-item-icon">
+							<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAMAAAApWqozAAAAeFBMVEUAAABAQEBAQGBQUGBVVWBXX19VXFxWW19ZWWFZXWFYXGBYW19WWmJYW2FXXGJWW2FYXWJYXGBYXGNZW2FYXGJZXWJZXWJYXGFYXGFXXGJZXGJZXWJYXGFZXGFYXWJYXWFYXGJYXWFZXWFYXGJZXWFZXWJYXGJZXWIkCgTvAAAAJ3RSTlMABAgQGCMkOz8/QENEVFtca3d3e3+Hj6Orr6/Dy8/T19vn7/P39/s4b4/3AAAA50lEQVQ4y+2VRxKDMAxFRU1CCb1X03z/G8Y2ZSBkgtlkkUEbyfCQ5G8xBlDiFnNYGysAKhfKcBVizG0xkMQacJhGUlP4xgPfKXyqjVMbBJVXOnVqiCy+9bt9fcE/hYNuObDOP4K71fE2R7DfL2zvXzp37//HKPehzmu5j3TeyH0N/x/CwjNvPZEu9bp+UC96bf4UPsCSg+gwVDqAO2A8uOSbij5BjrSDl4mLktEn0TKnO5jlsJsxyrJpQO2x3gYmdXFhke5kli4UhJAVkclOrIJEwwoO+nS+DI0SmdSbqDTmKzDtAxa8AKyZZXVBIi1fAAAAAElFTkSuQmCC">
+						</div>
+						<div class="mint-tab-item-label">
+							预约
+						</div>
+					</a>
+					<a class="mint-tab-item is-selected">
+						<div class="mint-tab-item-icon">
+							<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAYAAAAehFoBAAABsUlEQVRYR+1YMU7DQBCctcACiSI0vAAaKuKaD/CHPACcBokHJFRUSDROPsAf8oHUDhVN/AIaKCiCI3mREbbs0xmf4j0kS+fWu6O59eR2JoSePdQzvqgRPo/ejnzv+I6ybEREpyaHYeaEPe85zd4fX8cnn7oeSdyS8A8oBguPcGlCVK3JGMsUH1cqaWnckvDFfDvxmKe7kC16MqLpy83+fRVDGrckPIzSNRGMZNB0KGYkq7F/Vn0vjVsSDmYpd5lu0RuHfu13IY3rCLsJ/2qtGISThJOEk4RyeTtJNEliOEvXhI6rGUhWobKahXH7a35yG3hAgwWwm70EsNyw3l5K4uoNPPPIVB4MJExkZuAFcPsdkSTspW0MN+F/nbBkutURH0ZfDwBdk0dPsZL9ivq2GuupuUo8iNItCHsANnHoH+oO1VZjfXHUCFdyo+o5irpqBtTVWE/N1ghLp1vt55acsCOsGXGbPvOWthrrIdRpWHeddNlWTdeVyec2qXGScBNW9NlfSdhKzdauNem/9q2vZlup2Zq9zIFLAy+QbrUTnm8nnPHtXwY+aKlxma7LljTp/QZOoABLVwrnrQAAAABJRU5ErkJggg==">
+						</div>
+						<div class="mint-tab-item-label">
+							进站码
+						</div>
+					</a>
+					<a href="record.html" class="mint-tab-item">
+						<div class="mint-tab-item-icon">
+							<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAYAAAAehFoBAAACGUlEQVRYR+2ZMUvDUBCA79qKBXVwq6Cbov4Hhzo6OhRaSEHzCwQHu7VO6uDgH2gLLbRQnLtm8EcUFBcFOzooVpv2JEow1Bdz6XsxHV62JncvX79c3kEOwefI5XKLyfmFY4CEgQjrfnEqzxPBHcC4OXp/vex0Oi+itVF00oFNpRe7ALijEoi/Ft3Yg5c9EbQQOG8clBETFf4N1EcSjSvtZv10cmUfYPPWLQMiLPUfR1eWVR+ox/pZMZs9SGdWEyeI8CXKKY92s7rBAi4UTXIDnx7u5yzLsqOEddd2oFfWEm/u71aj+kuo0LAXWJQUJXzQvTWwrH1tWNZgUL42HGRI9rpyw4WieQZARwCY5sHRgAjP283qr64lyo8A+PCND+si0XOrUVvm/EHlwHnDLCNCCQCYhmFABPEZ5liSiVFuWAaGk6uBOZZkYrRhGXucXG04fKcTefXvfsoNF4rTdDohtLD7KQeeotOJaH27n3JgzosjE6OBZexxcrVhjiWZGG1Yxh4nd6YMh+2SsX9byxvmEBFSHNNOTOzA3scdDE29VqO2PRn3rx8D/eozZ5ibSSQLATMOIAH1hzbtXrfqvZkDDgPrwMdqOCxsrMA2wRa3DLxlEWhY5cjAW8NOnXJqllXDecM7lIFK/3F8oWIoI9ol/nrBRDtJrGOvsLC+Nfw9WFzqAkBkg8VpYH2BnQvRjm6p92HTvmifDWoon4KJ+zxnGrLYAAAAAElFTkSuQmCC">
+						</div>
+						<div class="mint-tab-item-label">
+							预约记录
+						</div>
+					</a>
+					<a href="mine.html" class="mint-tab-item">
+						<div class="mint-tab-item-icon">
+							<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAMAAAApWqozAAAA1VBMVEUAAABAQEBAQGBVVVVQUGBZWVlVVWBSWmNVXFxVXGJTWWBZWWBXXGJVWmBYWF1WW19VWWJYXGBYW19WWmJWWmFZXGBXXmFWXGBYW2FXXWBYXWJXXGFYW2BYXWJXXGBaXGBZXWJYXGBZXWFYXGBYXGJYW2FZXWBZXWJYXGFZXWJYXGFYXWJZXGFYXWJYXGFZXGJZXWJYXWFYXGJZXGJZXWJYXGFZXWJYXGFYXWFZXGFYXWJZXWFYXGJYXWFZXGJYXWFZXGJZXWFYXGJZXWFZXWJYXGJZXWJeFgJ0AAAARnRSTlMABAgMEBQYHyQnKCgvMDQ7PEBDREdIT1BUWGNkaGtvb3N3e39/g4eHi4+Tl5ufo6ens7e3u7/Dx8vP09fb3+Pn6+/z9/f792mgMgAAAZBJREFUOMvVldlWwjAURW9owRFnxAlHUItVcQBUxoLZ//9JPrTQRkzKq+cp52Y36+au01ZkQQdPfRi0GyuSq7UuiXRT5bDbE1I9u9nNCejmli+loxfg0MUWejAqJ6YJbVcjVzBZn5l9oGln1QhOU/sAumiFd2FUyPguHFnhC3jM+nu4tsJ1qLv8f4e9wSI88CzwMVDJFirAsR1+NSuvdngDIiM5KoINW9NDqGV9DYbWaQQwzSSnOIXAChd7UE1tFXr21EkIV0a6Q0f4T6E/v2Khb6R7QX6UOSyEyHe9hDXgbh5mczaLaoGOVxqecr4bqxDFqwhWc+BzeItXb3DuZlU6AWMytkRHSSi9yBV9UXst4GJmL4HWnvqbDMcA72nlHWAc/uZnJISZnUIY1wzeu0nIYVA2DykHw4S/SW5S+krInb/a20n4r5KIiPqwk1n+Q4nICeiznB+COtNwIiIdI8M2XUNHxAft58NF0J5UoStL6BMqEswD7FYAt/ETS6gKXdFobxnY10yl/t2QpdT4rv8A9QRd89aG/skAAAAASUVORK5CYII=">
+						</div>
+						<div class="mint-tab-item-label">
+							我的
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="mint-indicator" style="display: none;">
+			<div class="mint-indicator-wrapper" style="padding: 15px;">
+				<span class="mint-indicator-spin">
+					<div class="mint-spinner-snake" style="border-top-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); border-bottom-color: rgb(204, 204, 204); height: 32px; width: 32px;">
+					</div>
+				</span>
+				<span class="mint-indicator-text" style="display: none;">
+				</span>
+			</div>
+			<div class="mint-indicator-mask">
+			</div>
+		</div>
+		<script type="text/javascript">
+
+			var currentDate = new Date();
+			var hour12 = currentDate.getHours() - 12;
+			
+			function addTime(date, hours, mins) {
+				//var d;
+				var time = new Date;
+				if (hour12 >= 0) {
+					time1 = new Date(time.getTime()+1000*60*60*24);
+					var Year1 = time1.getFullYear().toString();
+					var Month1 = (time1.getMonth() + 1).toString();
+					var Day1 = time1.getDate().toString();
+					var d = new Date(`${Year1}-${Month1}-${Day1}`.replace(/-/g,'/'));
+				 } else {
+					var Year = time.getFullYear().toString();
+					var Month = (time.getMonth() + 1).toString();
+					var Day = time.getDate().toString();
+					var d = new Date(`${Year}-${Month}-${Day}`.replace(/-/g,'/'));
+				 } 
+					d.setHours(d.getHours() + hours);
+					d.setMinutes(d.getMinutes() + mins);
+					return d;	
+			}
+					
+			const date = new Date();
+			const inputTime = addTime(date, 9, 00);
+
+			function countDown() {
+				var nowTime = +new Date(); 
+				var times = (inputTime - nowTime) / 1000; 
+				var h = parseInt(times / 60 / 60 % 24);
+				h = h < 10 ? '0' + h: h; 
+				$('#hour')[0].innerHTML = h; 
+				var m = parseInt(times / 60 % 60);
+				m = m < 10 ? '0' + m: m;
+				$('#minute')[0].innerHTML = m; 
+				var s = parseInt(times % 60);
+				s = s < 10 ? '0' + s: s;
+				$('#second')[0].innerHTML = s; 
+
+				//var nowTime = +new Date();
+				//const date = new Date();
+
+					if (times > 0) {
+						$('#nodata').addClass('hidden');
+						$('#showcode').removeClass('hidden');
+						$('#hiddenLeftMsg').removeClass('hidden');
+						$('#hiddenTimeLeft').removeClass('hidden');
+					} else {
+						$('#nodata').removeClass('hidden');
+						$('#hiddenLeftMsg').addClass('hidden');
+						$('#hiddenTimeLeft').addClass('hidden');
+						$('#showcode').addClass('hidden');
+					}
+			}
+	
+			function showDate() {
+				var time = new Date;
+				if (hour12 >= 0) {
+					time = new Date(time.getTime()+1000*60*60*24);
+					var Year = time.getFullYear();
+					var Month = (time.getMonth() + 1).toString();
+					Month1 = Month < 10 ? '0' + Month: Month; 
+					var Day = time.getDate().toString();
+					Day1 = Day < 10 ? '0' + Day: Day;
+				} else {
+					var Year = time.getFullYear();
+					var Month = (time.getMonth() + 1).toString();
+					Month1 = Month < 10 ? '0' + Month: Month; 
+					var Day = time.getDate().toString();
+					Day1 = Day < 10 ? '0' + Day: Day;
+				}
+				$('#date')[0].innerHTML = Year + '-' + Month1 + '-' + Day1;
+			}
+		</script>
+	</body>
+</html>

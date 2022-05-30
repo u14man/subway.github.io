@@ -1,0 +1,115 @@
+<html lang="en" style="font-size: 104px;">
+	<head>
+		<link rel="icon" href="favicon.ico">
+		<title>
+			预约记录
+		</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+		<meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,user-scalable=no">
+		<link href="css/chunk-vendors.779f7d1d.css" rel="stylesheet">
+		<link href="css/app.f0480dbd.css" rel="stylesheet"> 
+		<script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="js/app.1eb4fb61.js"></script>
+	</head>
+	<body onload="showDate();inputTime();">
+		<div id="app" class="">
+			<div class="main">
+				<div class="body">
+					<div data-v-7e852731="" class="page">
+						<div data-v-7e852731="" class="tab">
+							<div data-v-7e852731="" class="item active">
+								已预约
+							</div>
+							<div data-v-7e852731="" class="item">
+								已进站
+							</div>
+							<div data-v-7e852731="" class="item">
+								已取消
+							</div>
+							<div data-v-7e852731="" class="item">
+								已过期
+							</div>
+						</div>
+						<div data-v-7e852731="" class="data-con">
+							<div data-v-7e852731="" class="list">
+								<div data-v-7e852731="" class="top-tip">
+									请务必在预约时间段前后
+									<span data-v-7e852731="" class="min">
+										10分钟
+									</span>
+									内进站。
+								</div>
+								<div id="list-data-con" data-v-7e852731="" class="item hidden">
+									<div data-v-7e852731="">
+										昌平线-沙河站
+										<span data-v-7e852731="">
+											<span id="record-date"></span>
+											<span id="code-date" class="hidden"></span>
+											(<span id="timeslot"></span>)
+										</span>
+									</div>
+									<div data-v-7e852731="" class="btn-con">
+										<div data-v-7e852731="" class="btn start">
+											<a href="code.html" style="color:#3296fa;text-decoration:none">
+												开始进站
+											</a>
+										</div>
+										<div data-v-7e852731="" class="btn edit">
+											修改
+										</div>
+										<div data-v-7e852731="" class="btn cancel">
+											取消
+										</div>
+									</div>
+								</div>
+							</div>
+							<!---->
+							<!---->
+							<!---->
+							<!---->
+							<div id="list-no-con" data-v-7e852731="" class="no-con nodata1 hidden"></div>
+							<!---->
+							<!---->
+						</div>
+					</div>
+				</div>
+				<div class="mint-tabbar home-tab">
+					<a href="index.html" class="mint-tab-item">
+						<div class="mint-tab-item-icon">
+							<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAMAAAApWqozAAAAeFBMVEUAAABAQEBAQGBQUGBVVWBXX19VXFxWW19ZWWFZXWFYXGBYW19WWmJYW2FXXGJWW2FYXWJYXGBYXGNZW2FYXGJZXWJZXWJYXGFYXGFXXGJZXGJZXWJYXGFZXGFYXWJYXWFYXGJYXWFZXWFYXGJZXWFZXWJYXGJZXWIkCgTvAAAAJ3RSTlMABAgQGCMkOz8/QENEVFtca3d3e3+Hj6Orr6/Dy8/T19vn7/P39/s4b4/3AAAA50lEQVQ4y+2VRxKDMAxFRU1CCb1X03z/G8Y2ZSBkgtlkkUEbyfCQ5G8xBlDiFnNYGysAKhfKcBVizG0xkMQacJhGUlP4xgPfKXyqjVMbBJVXOnVqiCy+9bt9fcE/hYNuObDOP4K71fE2R7DfL2zvXzp37//HKPehzmu5j3TeyH0N/x/CwjNvPZEu9bp+UC96bf4UPsCSg+gwVDqAO2A8uOSbij5BjrSDl4mLktEn0TKnO5jlsJsxyrJpQO2x3gYmdXFhke5kli4UhJAVkclOrIJEwwoO+nS+DI0SmdSbqDTmKzDtAxa8AKyZZXVBIi1fAAAAAElFTkSuQmCC">
+						</div>
+						<div class="mint-tab-item-label">
+							预约
+						</div>
+					</a>
+					<a href="code.html" class="mint-tab-item">
+						<div class="mint-tab-item-icon">
+							<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAYAAAAehFoBAAAB5ElEQVRYR+2ZQUsCQRTH39uMjOxeULf6Fh289gGEFVaQPXUMOtRNO0WHoL7AJrig4Afwuge/RdElIe8ZbaRObLrLrs3OLDYjjoxX37z9zd83zv/PIij2QcV4IQFcKpUKG1s7FwCGhQhHWTZDCDwDTNzx18ddp9MZ0taI7BsBB01z+UIXAE+ygP6tIb2RPzydhxbdNwI2rWoN0agvBjtdRcik3nYb1/EeovvGgO2ncAwIwatBf/zgeQ2ftYFisZrfOzAuEeF3o8F4tF3nOAkstm8EXK7YJHzQ2+vLpud5oyxqB9D7h8ZnWNtqOolzIbovFXj+oTzwOBQLWERfDawVns1jKIQeCT0SazkSSlwcphW/QqE+6E9uxV/N/++rrvmZ2sDdLgAsaC+hN/LfU+yluL7qGniewVmV79XOdKuiIotDbYVFpluaSuWKfQNAzgjB+7brJLJfWM+rkZ6a5/LdNyLkAIjfaj5u0zZlWjazRvrFEYdiRamYwlG2pEUq6alZGrDodJsyw0z1gjW8X0F64liKwiLiuFZ4poAeCdY48Q6UPnRppiSLclnUy1KzHjMsMjVL+x+WlZolAst5ZSANWFZqpttL8FtNh2Mv6TVLSc0htGnZNUQ4JwRSDTyvRu2IpEII/QE/Rs9L1dUEbgAAAABJRU5ErkJggg==">
+						</div>
+						<div class="mint-tab-item-label">
+							进站码
+						</div>
+					</a>
+					<a class="mint-tab-item is-selected">
+						<div class="mint-tab-item-icon">
+							<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAYAAAAehFoBAAACHklEQVRYR+2ZQUvjQBTH/6+Im8IivXhpWkFYT34Cwcse/Q5+B10WMQXFWRAaQcGDH8HvsJc97nGve1FBaJqTB3sQTFX6JGsr0s60L+mk7rLTY/Lm5ZdfXualMwTDb1H9/vihXPlKPd4kok+mOJvHmfmKS3Teve+c3KjVO11u0h1MYT2v8p2AdZtA0lwM/EySzoYOWgtcO4oPSgwlvUARcT2Cau/634Zza4HrzfiSCDMpA9PNMuMqavgrIuClMOYirGXN2Qr8EaFaww44q9p+vDOcU5x4mDMsVpUz8P80zMBOlDycQS0nInHq2lsqz2+BEYri3wRZMdxKHspi2P7FK+q6suDN374LMDPtRd3uiRj6xfAucnybWDGc1dI08Q54GnuSsc6wxNI0Mc7wNPYkY60YztzpdGTC7mcFOE+n0zFLup8V4Mydzmx4YvezAiypPVsxDtiWSVMeZ9gZHjLgSiJPSTDwi4EfJcLE/4Qt6eplUWtrKWyUXKxBfX7Kc7PpmJkuBjLoMAqq+7UwbpaYt0Hk6cCZ8cSE43bgN4bPzxQYBJU+5nozfiTC3FjLzEmrUSv/FcCSkmPgOAr8nX8CmEGnUVD9onsC71IS4wyPg535SzeoYRPwJFgjcD2MLwkFbMr0XzodsATWCFzYtpcBWAprBC5sY3EwrYXxI+FlWssCawROT7xu3TI2rZVHH/hP4wC2e6DTdlAdaQ7j5udnahRZPHEzqdgAAAAASUVORK5CYII=">
+						</div>
+						<div class="mint-tab-item-label">
+							预约记录
+						</div>
+					</a>
+					<a href="mine.html" class="mint-tab-item">
+						<div class="mint-tab-item-icon">
+							<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAMAAAApWqozAAAA1VBMVEUAAABAQEBAQGBVVVVQUGBZWVlVVWBSWmNVXFxVXGJTWWBZWWBXXGJVWmBYWF1WW19VWWJYXGBYW19WWmJWWmFZXGBXXmFWXGBYW2FXXWBYXWJXXGFYW2BYXWJXXGBaXGBZXWJYXGBZXWFYXGBYXGJYW2FZXWBZXWJYXGFZXWJYXGFYXWJZXGFYXWJYXGFZXGJZXWJYXWFYXGJZXGJZXWJYXGFZXWJYXGFYXWFZXGFYXWJZXWFYXGJYXWFZXGJYXWFZXGJZXWFYXGJZXWFZXWJYXGJZXWJeFgJ0AAAARnRSTlMABAgMEBQYHyQnKCgvMDQ7PEBDREdIT1BUWGNkaGtvb3N3e39/g4eHi4+Tl5ufo6ens7e3u7/Dx8vP09fb3+Pn6+/z9/f792mgMgAAAZBJREFUOMvVldlWwjAURW9owRFnxAlHUItVcQBUxoLZ//9JPrTQRkzKq+cp52Y36+au01ZkQQdPfRi0GyuSq7UuiXRT5bDbE1I9u9nNCejmli+loxfg0MUWejAqJ6YJbVcjVzBZn5l9oGln1QhOU/sAumiFd2FUyPguHFnhC3jM+nu4tsJ1qLv8f4e9wSI88CzwMVDJFirAsR1+NSuvdngDIiM5KoINW9NDqGV9DYbWaQQwzSSnOIXAChd7UE1tFXr21EkIV0a6Q0f4T6E/v2Khb6R7QX6UOSyEyHe9hDXgbh5mczaLaoGOVxqecr4bqxDFqwhWc+BzeItXb3DuZlU6AWMytkRHSSi9yBV9UXst4GJmL4HWnvqbDMcA72nlHWAc/uZnJISZnUIY1wzeu0nIYVA2DykHw4S/SW5S+krInb/a20n4r5KIiPqwk1n+Q4nICeiznB+COtNwIiIdI8M2XUNHxAft58NF0J5UoStL6BMqEswD7FYAt/ETS6gKXdFobxnY10yl/t2QpdT4rv8A9QRd89aG/skAAAAASUVORK5CYII=">
+						</div>
+						<div class="mint-tab-item-label">
+							我的
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
