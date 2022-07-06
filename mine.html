@@ -11,15 +11,15 @@
 		<link href="css/chunk-vendors.779f7d1d.css" rel="stylesheet">
 		<link href="css/app.f0480dbd.css" rel="stylesheet">
 	</head>
-	<body>
+	<body  onload="randomNum()">
 		<div id="app" class="">
 			<div class="main">
 				<div class="body">
 					<div data-v-1654e5c9="" class="page">
 						<div data-v-1654e5c9="" class="top">
 							<div data-v-1654e5c9="" class="left">
-								<div data-v-1654e5c9="" class="phone">
-									13120228088
+								<div data-v-1654e5c9="" class="phone" id="phone1">
+									
 								</div>
 								<div data-v-1654e5c9="" class="tip">
 									尊敬的用户，欢迎回来！
@@ -53,10 +53,10 @@
 								<div data-v-1654e5c9="" class="left-icon">
 									<img data-v-1654e5c9="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACGklEQVRYR+2XX24TMRDGv9lAN+IIeUCxFcQpuADPVbQIJDgC8AAFqQXBQ0UlBJygSDyQPzcAcQ9KpbE5Bm3XRpaa1dbxek02oS/143rG38/jGa+HEBiDweBGv99/BmAbwG0A10J2oW/GmHda651Ue/INh8Nhn4i+EdGd1EV8O2PMR631kxT/EMB+lmXJO2gSSYVYApBS/gZw0y1srd1VSh0AOGnbjZTSBiLxQWv9NOa7BCCEKIkoc07MvAXgtE3czYcAzv0+MfPjpjVCEah2wsxL800L1QGMMZ+zLHu0sI0dx0YAmDkTQhwS0cMacDASGwGIHNkBMz+vz68T4A8AlzOxcXqeV5XNOgFeA3jRBuHn1doAYtuuJ+jKAPP5/D6AkS9krf05Ho+nGwWYzWaupA4jIkUMonMEptPpAyL6Erl27xVFMUm5I1Y+gslkUvR6PfdnvDDKsjyKifu35MoAKdfxRiNw6QBNVRAC8yujcxImVEGIo6qMzgBtVRBSN8ZUldEZwAk0VUFI3K+MtQBcehJeAVxF4L9FQAhxRkQ9J8jMeUpP0AK3JaV0zzU3zpj5et0+9CI6Xjw8jDGvtNb7qb1BACSXUr4EsOfmrLW/lFIX/qihxuQNEe12CXmTr7V2Tyn1NhqB0WiUl2X5vUtz2vCD+qGUuusfabDzce15nueuQd0molv/0p574q6tO7LWflVKvQewyIXK7C9/iGYwFDLayQAAAABJRU5ErkJggg==">
 								</div>
-								<div data-v-1654e5c9="" class="content">
+								<div data-v-1654e5c9="" class="content" >
 									手机号码
-									<span data-v-1654e5c9="" style="float: right; margin-right: 0.08rem; font-size: 0.15rem; color: rgb(85, 85, 85);">
-										13120228888
+									<span data-v-1654e5c9=""  id="phone" style="float: right; margin-right: 0.08rem; font-size: 0.15rem; color: rgb(85, 85, 85);">
+										
 									</span>
 								</div>
 								<div data-v-1654e5c9="" class="icon">
@@ -142,5 +142,13 @@
 				</div>
 			</div>
 		</div>
+		<script>
+		function randomNum() {
+		   var Rand = Math.random()
+		   var myPhoneNum = '131' + Math.round(Rand * 100000000)
+		  document.getElementById("phone").innerHTML = myPhoneNum;
+		  document.getElementById("phone1").innerHTML = myPhoneNum;
+		}
+		</script>
 	</body>
 </html>
