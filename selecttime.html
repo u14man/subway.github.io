@@ -141,12 +141,12 @@ function changeSrcAndStatus() {
 	if (currentDate.getDay() == 6) {
 		$(".todaybg").each(function() {
 			$(this)[0].src = blue;
-			$(".todaybg910")[0].src = blue;
+			$(".todaybg910")[0].src = green;
 		});
 		$(".time-select-today").each(function() {
 			$(this)[0].innerHTML = "未开始";
 		});
-		$(".time-select-today910")[0].innerHTML = "未开始";
+		$(".time-select-today910")[0].innerHTML = "<a href=\"910-920.html\" style=\"color:#fff;text-decoration:none\">✔调休</a>";
 	} else if (currentDate.getDay() == 0) {
 		if (hour >= 0) {
 			$(".todaybg").each(function() {
@@ -306,7 +306,7 @@ function changeSrcAndStatus() {
 		$(".time-select-nextday").each(function() {
 			$(this)[0].innerHTML = "未开始";
 		});
-		$(".time-select-nextday910")[0].innerHTML = "点我";
+		$(".time-select-nextday910")[0].innerHTML = "未开始";
 	} else {
 		if (hour >= 0) {
 			$(".nextdaybg").each(function() {
@@ -326,7 +326,7 @@ function changeSrcAndStatus() {
 			$(".time-select-nextday").each(function() {
 				$(this)[0].innerHTML = "未开始";
 			});
-			$(".time-select-nextday910")[0].innerHTML = "点我";
+			$(".time-select-nextday910")[0].innerHTML = "未开始";
 		}
 	}
 }
