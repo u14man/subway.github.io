@@ -11,6 +11,8 @@
 		<meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,user-scalable=no"
 		/>
 		<link href="css/chunk-vendors.779f7d1d.css" rel="stylesheet" />
+		<link href="cute-alert/style.css" rel="stylesheet">
+		<script src="cute-alert/cute-alert.js"></script>
 		<link href="css/app.f0480dbd.css" rel="stylesheet" />
 <script>
 var _hmt = _hmt || [];
@@ -139,5 +141,12 @@ var _hmt = _hmt || [];
 			</div>
 		</div>
 	</body>
-
+	<script>
+		cuteAlert({
+		  type: "info",
+		  title: "更新计划说明",
+		  message: "本站将会在下个更新中适配调休日。届时网站可能需要进行维护。为了避免不便，请扫描上方二维码加入微信群来获取备用网址。",
+		  buttonText: "我知道了"
+		})
+		</script>
 </html>
