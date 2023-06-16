@@ -10,6 +10,9 @@
 		<meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,user-scalable=no">
 		<link href="css/chunk-vendors.779f7d1d.css" rel="stylesheet">
 		<link href="css/app.f0480dbd.css" rel="stylesheet">
+		<link href="cute-alert/style.css" rel="stylesheet">
+		<script src="cute-alert/cute-alert.js"></script>
+		
 	</head>
 	<body  onload="randomNum()">
 		<div id="app" class="">
@@ -150,5 +153,14 @@
 		  document.getElementById("phone1").innerHTML = myPhoneNum;
 		}
 		</script>
+		<script>
+			cuteAlert({
+			  type: "warning",
+			  title: "！！！升级公告 ！！！",
+			  message: "网站正在升级维护中",
+			  buttonText: "我知道了"
+			})
+			</script>
+		
 	</body>
 </html>
