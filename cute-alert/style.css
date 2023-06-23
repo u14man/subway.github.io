@@ -37,7 +37,7 @@
 
 .alert-frame {
   background: #fff;
-  min-height: 240px;
+  min-height: 350px;
   width: 350px;
   box-shadow: 5px 5px 10px rgb(0, 0, 0, 0.2);
   border-radius: 10px;
@@ -79,7 +79,7 @@
 .alert-close {
   width: 30px;
   height: 30px;
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Dosis', sans-serif;
@@ -131,7 +131,6 @@
   margin-bottom: 20px;
   color: #222;
   align-self: center;
-  display: none;
 }
 
 .alert-message {
@@ -162,7 +161,6 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  display: none;
 }
 
 .alert-button:focus {
