@@ -229,14 +229,18 @@ function updateTimeSelectTodayAfter12() {
 	}
 }
 
-
-function changeTodayStatus(isWorkdayToday, isWorkdayTomorrow) {
+//第一个工作日状态显示
+function changeTodayStatus(isNotWorkToday, isNotWorkTomorrow) {
 	if (currentDate.getDay() == 6) {
-		if (isWorkdayToday === 1) {
+		console.log("今天周六，isNotWork =  " + isNotWorkToday);
+		if (isNotWorkToday === 0) {
+			console.log("明天还要工作啊");
 			updateTimeSelectToday630930();
-		} else if (isWorkdayTomorrow === 1) {
+		} else if (isNotWorkTomorrow === 0) {
+			console.log("xxxxxxxxxxxxxx");
 			updateTimeSelectTodayAfter12();
-		} else { 
+		} else { // 如果是调休日
+			console.log("休息下xxxxxxxxxxx");
 			$(".todaybg").each(function() {
 				$(this)[0].src = blue;
 				$(".todaybg910")[0].src = blue;
@@ -247,7 +251,9 @@ function changeTodayStatus(isWorkdayToday, isWorkdayTomorrow) {
 			$(".time-select-today910")[0].innerHTML = "未开始";
 		}
 	} else if (currentDate.getDay() == 0) {
-		if (isWorkdayToday === 2) { 
+		if (isNotWorkToday === 1) { // 如果不是调休日
+			console.log("今天周日，isNotWork =  " + isNotWorkToday);
+			console.log("明天就要工作了");
 			if (hour >= 0) {
 				$(".todaybg").each(function() {
 					$(this)[0].src = gray;
@@ -270,11 +276,13 @@ function changeTodayStatus(isWorkdayToday, isWorkdayTomorrow) {
 				$(".time-select-today910")[0].innerHTML = "未开始";
 			}
 
-		} else { 
+		} else { // 如果是调休日
+			console.log("今天周日，但isNotWorkToday =  " + isNotWorkToday + "  所以今天还要工作啊");
 			updateTimeSelectToday630930();
 		}
 
 	} else {
+		console.log("周一到周五，肯定要上班啊  " + isNotWorkToday);
 		updateTimeSelectToday630930();
 	}
 }
@@ -324,47 +332,56 @@ function updateTimeSelectTomorrowNeverStart() {
 	$(".time-select-nextday910")[0].innerHTML = "未开始";
 }
 
-function changeTomorrowStatus(isWorkdayToday, isWorkdayTomorrow) {
+//第二个工作日状态显示
+function changeTomorrowStatus(isNotWorkToday, isNotWorkTomorrow) {
 	switch (currentDate.getDay()) {
 	case 5:
-		if (isWorkdayTomorrow === 2) {
+		if (isNotWorkTomorrow === 1) {
+			console.log("是周日的预约，应该一直显示未开始");
 			updateTimeSelectTomorrowNeverStart();
-		} else if (isWorkdayTomorrow === 1) {
+		} else if (isNotWorkTomorrow === 0) {
+			console.log("是周六的预约，12点前后不一样");
 			updateTimeSelectTomorrowAfter12();
 		}
 		break;
 	case 6:
-		if (isWorkdayToday === 1) {
-			if (isWorkdayTomorrow === 2) {
+		if (isNotWorkToday === 0) {
+			if (isNotWorkTomorrow === 1) {
+				console.log("是周一的预约，应该一直显示未开始");
 				updateTimeSelectTomorrowNeverStart();
-			} else if (isWorkdayTomorrow === 1) {
+			} else if (isNotWorkTomorrow === 0) {
+				console.log("是周日的预约，12点前后不一样");
 				updateTimeSelectTomorrowAfter12();
 			}
-		} else if (isWorkdayToday === 2) {
+		} else if (isNotWorkToday === 1) {
+			console.log("是周一或周二的预约，应该一直显示未开始");
 			updateTimeSelectTomorrowNeverStart();
 		}
 		break;
 	case 0:
-		if (isWorkdayToday === 1 && isWorkdayTomorrow === 1) {
+		if (isNotWorkToday === 0 && isNotWorkTomorrow === 0) {
+			console.log("是周一的预约，12点前后不一样");
 			updateTimeSelectTomorrowAfter12();
-		} else if (isWorkdayToday === 2) {
+		} else if (isNotWorkToday === 1) {
+			console.log("是周二的预约，应该一直显示未开始");
 			updateTimeSelectTomorrowNeverStart();
 		}
 		break;
 	default:
+		console.log("已预约");
 		updateTimeSelectTomorrowAfter12();
 		break;
 	}
 }
 
-// 获取当前日期, 格式20230506，用于API查询, 返回1代表工作日 2代表非工作日
-const apiUrl = "https://api.apihubs.cn/holiday/get";
+// 获取当前日期, 格式2023-05-06，用于API查询, 返回1代表非工作日 0代表工作日
+const apiUrl = "https://apis.tianapi.com/jiejiari/index?key=d2c3e9453311b8f5ae88f7360d8d96c1";
 
 const formatDate = (date) => {
 	const year = date.getFullYear();
 	const month = String(date.getMonth() + 1).padStart(2, "0");
 	const day = String(date.getDate()).padStart(2, "0");
-	return `${year}${month}${day}`;
+	return `${year}-${month}-${day}`;
 };
 const formatDateMonthDay = (date) => {
 	const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -377,9 +394,9 @@ const tomorrow = new Date(today.getTime() + 1000 * 60 * 60 * 24);
 const afterTomorrow = new Date(today.getTime() + 1000 * 60 * 60 * 48);
 const ThreeDaysLater = new Date(today.getTime() + 1000 * 60 * 60 * 72);
 
-const requestTodayUrl = `${apiUrl}?date=${formatDate(today)}`;
-const requestTomorrowUrl = `${apiUrl}?date=${formatDate(tomorrow)}`;
-const requestAfterTomorrowUrl = `${apiUrl}?date=${formatDate(afterTomorrow)}`;
+const requestTodayUrl = `${apiUrl}&date=${formatDate(today)}`;
+const requestTomorrowUrl = `${apiUrl}&date=${formatDate(tomorrow)}`;
+const requestAfterTomorrowUrl = `${apiUrl}&date=${formatDate(afterTomorrow)}`;
 
 const weekDays = ["日", "一", "二", "三", "四", "五", "六"];
 const dayOfWeek = today.getDay();
@@ -391,89 +408,113 @@ const updateDate = (elementSelector, date, dayOfWeek) => {
 	$(elementSelector)[0].innerHTML = formattedDate + "\xa0" + '周' + weekDays[dayOfWeek];
 };
 
-function setCurrentDay(isWorkdayToday, isWorkdayTomorrow) {
+// 根据今天日期判断：如果是调休日则显示实际日期，否则将周六和周日设置为周一
+function setCurrentDay(isNotWorkToday, isNotWorkTomorrow) {
 	if (dayOfWeek === 6) {
-		if (isWorkdayToday === 1) {
+		if (isNotWorkToday === 0) {
+			console.log("周六 当天的日期setCurrentDay");
 			updateDate("#todaydate", today, dayOfWeek);
-		} else if (isWorkdayToday === 2 && isWorkdayTomorrow === 1) {
+		} else if (isNotWorkToday === 1 && isNotWorkTomorrow === 0) {
+			console.log("周日 第二天的日期setCurrentDay");
 			updateDate("#todaydate", tomorrow, nextDayOfWeek);
-		} else if (isWorkdayToday === 2 && isWorkdayTomorrow === 2) {
+		} else if (isNotWorkToday === 1 && isNotWorkTomorrow === 1) {
+			console.log("周一 第三天的日期setCurrentDay");
 			updateDate("#todaydate", afterTomorrow, nextNextDayOfWeek);
 		}
 	} else if (dayOfWeek === 0) {
-		if (isWorkdayToday === 1) {
+		if (isNotWorkToday === 0) {
+			console.log("周日 当天的日期setCurrentDay");
 			updateDate("#todaydate", today, dayOfWeek);
-		} else if (isWorkdayToday === 2) {
+		} else if (isNotWorkToday === 1) {
+			console.log("周一 第二天的日期setCurrentDay");
 			updateDate("#todaydate", tomorrow, nextDayOfWeek);
 		}
 	} else {
+		console.log("当天的日期setCurrentDay");
 		updateDate("#todaydate", today, dayOfWeek);
 
 	}
 }
 
-function setNextDay(isWorkdayToday, isWorkdayTomorrow, isWorkdayAfterTomorrow) {
+// 根据明天日期判断：如果是调休日则显示实际日期，否则将周六和周日设置为周一
+function setNextDay(isNotWorkToday, isNotWorkTomorrow, isNotWorkAfterTomorrow) {
 	if (dayOfWeek === 5) {
-		if (isWorkdayTomorrow === 1) {
+		if (isNotWorkTomorrow === 0) {
+			console.log("周六 第二天的日期");
 			updateDate("#nextdaydate", tomorrow, nextDayOfWeek);
-		} else if (isWorkdayTomorrow === 2 && isWorkdayAfterTomorrow === 1) {
+		} else if (isNotWorkTomorrow === 1 && isNotWorkAfterTomorrow === 0) {
+			console.log("周日 第三天的日期");
 			updateDate("#nextdaydate", afterTomorrow, nextNextDayOfWeek);
 		} else {
+			console.log("周一 第4天的日期" + nextNextDayOfWeek);
 			$('#nextdaydate')[0].innerHTML = formatDateMonthDay(ThreeDaysLater) + "\xa0" + '周一';
 		}
 	} else if (dayOfWeek === 6) {
-		if (isWorkdayToday === 1 && isWorkdayTomorrow === 2) {
+		if (isNotWorkToday === 0 && isNotWorkTomorrow === 1) {
+			console.log("周一 第三天的日期");
 			updateDate("#nextdaydate", afterTomorrow, nextNextDayOfWeek);
-		} else if (isWorkdayToday === 2 && isWorkdayTomorrow === 1) {
+		} else if (isNotWorkToday === 1 && isNotWorkTomorrow === 0) {
+			console.log("周一 第三天的日期");
 			updateDate("#nextdaydate", afterTomorrow, nextNextDayOfWeek);
-		} else if (isWorkdayToday === 1 && isWorkdayTomorrow === 1) {
+		} else if (isNotWorkToday === 0 && isNotWorkTomorrow === 0) {
+			console.log("周日 第二天的日期");
 			updateDate("#nextdaydate", tomorrow, nextDayOfWeek);
-		} else if (isWorkdayToday === 2 && isWorkdayTomorrow === 2) {
+		} else if (isNotWorkToday === 1 && isNotWorkTomorrow === 1) {
+			console.log("周二的日期");
 			$('#nextdaydate')[0].innerHTML = formatDateMonthDay(ThreeDaysLater) + "\xa0" + '周二';
 		}
 	} else if (dayOfWeek === 0) {
-		if (isWorkdayToday === 1) {
+		if (isNotWorkToday === 0) {
+			console.log("周一 第二天的日期");
 			updateDate("#nextdaydate", tomorrow, nextDayOfWeek);
-		} else if (isWorkdayToday === 2) {
+		} else if (isNotWorkToday === 1) {
+			console.log("周二 第三天的日期");
 			updateDate("#nextdaydate", afterTomorrow, nextNextDayOfWeek);
 		}
 	} else {
+		console.log("第二天的日期");
 		updateDate("#nextdaydate", tomorrow, nextDayOfWeek);
 	}
 
 }
 
+// 在第一个请求中处理isNotWorkToday的值
 fetch(requestTodayUrl)
 .then(response => response.json())
 .then(data => {
-	let isWorkdayToday;
+	let isNotWorkToday;
 	try {
-	isWorkdayToday = data.data.list[0].workday;
+	isNotWorkToday = data.result.list[0].isnotwork;
 	} catch (error) {
-	isWorkdayToday = 1;
+	isNotWorkToday = 0; // 设置默认值
 	}
+	// 第二个请求并处理isNotWorkTomorrow的值，并调用setNextDay函数传递这两个值
 	fetch(requestTomorrowUrl)
 	.then(response => response.json())
 	.then(data => {
-		let isWorkdayTomorrow;
+		let isNotWorkTomorrow;
 		try {
-		isWorkdayTomorrow = data.data.list[0].workday;
+		isNotWorkTomorrow = data.result.list[0].isnotwork;
 		} catch (error) {
-		isWorkdayTomorrow = 1; 
+		isNotWorkTomorrow = 0; // 设置默认值
 		}
+		// 第三个请求并处理isNotWorkAfterTomorrow的值，并调用setNextDay函数传递这两个值
 		fetch(requestAfterTomorrowUrl)
 		.then(response => response.json())
 		.then(data => {
-			let isWorkdayAfterTomorrow;
+			let isNotWorkAfterTomorrow;
 			try {
-				isWorkdayAfterTomorrow = data.data.list[0].workday;
+				isNotWorkAfterTomorrow = data.result.list[0].isnotwork;
 			} catch (error) {
-				isWorkdayAfterTomorrow = 1; 
+				isNotWorkAfterTomorrow = 0; // 设置默认值
 			}
-			changeTodayStatus(isWorkdayToday,isWorkdayTomorrow);
-			changeTomorrowStatus(isWorkdayToday,isWorkdayTomorrow);
-			setCurrentDay(isWorkdayToday,isWorkdayTomorrow);
-			setNextDay(isWorkdayToday, isWorkdayTomorrow, isWorkdayAfterTomorrow);
+			console.log("isNotWorkToday =" + isNotWorkToday)
+			console.log("isNotWorkTomorrow =" + isNotWorkTomorrow)
+			console.log("isNotWorkAfterTomorrow =" + isNotWorkAfterTomorrow)
+			changeTodayStatus(isNotWorkToday,isNotWorkTomorrow);
+			changeTomorrowStatus(isNotWorkToday,isNotWorkTomorrow);
+			setCurrentDay(isNotWorkToday,isNotWorkTomorrow); // 将当前日期也传递给setCurrentDay函数
+			setNextDay(isNotWorkToday, isNotWorkTomorrow, isNotWorkAfterTomorrow);
 		});
 	});
 });

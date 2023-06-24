@@ -81,9 +81,11 @@
 
 	var inputTime;
 	
-	function changeTimeslot(isWorkdayToday, isWorkdayTomorrow) {
+	function changeTimeslot(isNotWorkToday, isNotWorkTomorrow) {
+		console.log(hour12)
 		if (hour12 < 0) {
-			if (isWorkdayToday == 1) {
+			if (isNotWorkToday === 0) {
+				console.log("工作日9:30之前常规展示");
 				if (left630 >= 15 && left630 <= 390) {
 					inputTime = addTime(date1, 6, 20);
 					$('#timeslot')[0].innerHTML = "06:30~06:40";
@@ -163,23 +165,27 @@
 					$('#timeslot')[0].innerHTML = "09:20~09:30";
 					$('#list-data-con').removeClass('hidden');
 				} else {
+					console.log("工作日过了9:30不显示");
 					$('#list-no-con').removeClass('hidden');
 				}
 			} else {
+				console.log("不是工作日不显示记录");
 				$('#list-no-con').removeClass('hidden');
 			}
 		} else {
-			if (isWorkdayTomorrow == 1) {
+			if (isNotWorkTomorrow === 0) {
+				console.log("明天是工作日显示900-910的记录");
 				inputTime = addTime(date1, 9, 00);
 				$('#timeslot')[0].innerHTML = "09:10~09:20";
 				$('#list-data-con').removeClass('hidden');
 			} else {
+				console.log("明天不是工作日不显示记录");
 				$('#list-no-con').removeClass('hidden');
 			}
 		}
 	}
 
-function countDown(isWorkdayToday, isWorkdayTomorrow) {
+function countDown(isNotWorkToday, isNotWorkTomorrow) {
 	var nowTime = +new Date();
 	var times = (inputTime - nowTime) / 1000;
 	var h = parseInt(times / 60 / 60 % 24);
@@ -195,27 +201,31 @@ function countDown(isWorkdayToday, isWorkdayTomorrow) {
 	var hour12 = currentDate.getHours() - 12;
 
 
-	if (isWorkdayToday === 1) {
+	if (isNotWorkToday === 0)  {
 		if (hour12 < 0) {
+			console.log("12点之前显示倒计时");
 			if (times > 0) {
-				$('#showcode')
-					.removeClass('hidden');
+				$('#showcode').removeClass('hidden');
 			} else {
-				$('#nodata')
-					.removeClass('hidden');
+				$('#nodata').removeClass('hidden');
 			}
 		} else {
-			if (isWorkdayTomorrow === 1) {
-				$('#showcode')
-					.removeClass('hidden');
+			if (isNotWorkTomorrow === 0) {
+				console.log("显示倒计时");
+				$('#showcode').removeClass('hidden');
 			} else {
-				$('#nodata')
-					.removeClass('hidden');
+				console.log("不显示倒计时1");
+				$('#nodata').removeClass('hidden');
 			}
 		}
-	} else if (isWorkdayToday === 2) {
-		$('#nodata')
-			.removeClass('hidden');
+	} else if (isNotWorkToday === 1) {
+		if (isNotWorkTomorrow === 0) {
+			console.log("显示倒计时");
+			$('#showcode').removeClass('hidden');
+		} else {
+		console.log("不显示倒计时2");
+		$('#nodata').removeClass('hidden');
+	}
 	}
 }
 
@@ -253,29 +263,33 @@ const formatDate = (date) => {
 			
 const today = new Date();
 const tomorrow = new Date(today.getTime() + 1000 * 60 * 60 * 24);
-const apiUrl = "https://api.apihubs.cn/holiday/get";
-const requestTodayUrl = `${apiUrl}?date=${formatDate(today)}`;
-const requestTomorrowUrl = `${apiUrl}?date=${formatDate(tomorrow)}`;
+const apiUrl = "https://apis.tianapi.com/jiejiari/index?key=d2c3e9453311b8f5ae88f7360d8d96c1";
+const requestTodayUrl = `${apiUrl}&date=${formatDate(today)}`;
+const requestTomorrowUrl = `${apiUrl}&date=${formatDate(tomorrow)}`;
 
+// 在第一个请求中处理isNotWorkToday的值
 fetch(requestTodayUrl)
 .then(response => response.json())
 .then(data => {
-	let isWorkdayToday;
+	let isNotWorkToday;
 	try {
-		isWorkdayToday = data.data.list[0].workday;
+		isNotWorkToday = data.result.list[0].isnotwork;
 	} catch (error) {
-		isWorkdayToday = 1; 
+		isNotWorkToday = 0; // 设置默认值
 	}
+	// 第二个请求并处理isNotWorkTomorrow的值
 	fetch(requestTomorrowUrl)
 		.then(response => response.json())
 		.then(data => {
-			let isWorkdayTomorrow;
+			let isNotWorkTomorrow;
 			try {
-				isWorkdayTomorrow = data.data.list[0].workday;
+				isNotWorkTomorrow = data.result.list[0].isnotwork;
 			} catch (error) {
-				isWorkdayTomorrow = 1; 
+				isNotWorkTomorrow = 0; // 设置默认值
 			}
-			changeTimeslot(isWorkdayToday, isWorkdayTomorrow);
-			countDown(isWorkdayToday, isWorkdayTomorrow);
+			console.log("isNotWorkToday =" + isNotWorkToday)
+			console.log("isNotWorkTomorrow =" + isNotWorkTomorrow)
+			changeTimeslot(isNotWorkToday, isNotWorkTomorrow);
+			countDown(isNotWorkToday, isNotWorkTomorrow);
 		});
 });         
